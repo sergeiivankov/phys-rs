@@ -1,0 +1,23 @@
+[package]
+name = "phys"
+version = "0.1.0"
+authors = [ "Sergei Ivankov <sergeiivankov@yandex.ru>" ]
+readme = "README.md"
+license = "Read Only License"
+edition = "2018"
+
+[lib]
+crate-type = [ "cdylib", "rlib" ]
+
+[profile.release]
+lto = true
+panic = "abort"
+codegen-units = 1
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = [ "-O3" ]
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+instant = { version = "0.1", features = [ "wasm-bindgen" ] }
